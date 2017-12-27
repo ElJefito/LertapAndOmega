@@ -1,0 +1,61 @@
+---
+title:
+author: "Larry Nelson"
+date: "27 December 2017"
+#output: word_document
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment=NA)
+```
+
+##### This [R program](https://en.wikipedia.org/wiki/R_(programming_language)) reads item scores data from an Omega-IScores.csv file, and then invokes the Omega function in the psych package to produce results.
+
+Omega-IScores.csv files are created by Lertap. A reference to the respective Lertap help page is [here](http://www.larrynelsonstuff.com/HTMLHelp/HTML/index.html?omega1.htm). The psych package's page at the CRAN site is [here](https://cran.r-project.org/web/packages/psych/index.html). A document which discusses the extensive capabilities of the psych package is also [available](https://cran.r-project.org/web/packages/psych/vignettes/overview.pdf); a related document devoted exclusively to omega is [this one](http://personality-project.org/r/psych/HowTo/R_for_omega.pdf). The Schmid-Leiman solution incorporated in the psych package is detailed [here](https://link.springer.com/content/pdf/10.3758/BF03206397.pdf).
+
+```{r echo=FALSE}
+library(psych) # Make the functions in the Psych package available for use.
+
+#set the working directory to the folder containing this RMD file.
+this.dir <- function(directory)
+setwd(file.path(getwd(),directory))
+
+```
+The Omega-IScores.csv file used in this analysis was obtained from this folder:    
+
+
+```{r echo=FALSE}
+
+getwd() # Okay, to confirm: R's working directory has been set to:
+ 
+#dir() # Here's a list of the files in the directory: 
+
+```
+***
+##### These are just a few of the data records from the csv file. The first column has a record number inserted by R, the next column must have item scores for the first of your items -- _make sure this column has item scores for the first item_ -- **not** some sort of record ID field. (Refer [here](http://www.larrynelsonstuff.com/HTMLHelp/HTML/index.html?omega1.htm) for help).    
+
+
+```{r echo=FALSE}
+
+MCQitems <- read.csv("Omega-Iscores.csv")
+ 
+head(MCQitems) # Check: the first few records in the csv file from Lertap look like this: 
+
+```
+ 
+***
+##### Output from the Omega function follows      
+
+ 
+```{r echo=FALSE}
+
+#date() # Show the date and time
+ 
+omega(MCQitems, digits=3, title="Omega results from the R Psych package", echo=FALSE)
+
+```
+
+***
+
+##### That's it, all done for now, _adios amigos_, support@lertap.com.
